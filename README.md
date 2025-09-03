@@ -1,1 +1,1 @@
-# Pinned-Extensions
+# Pinned Extensions
