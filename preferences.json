@@ -1,0 +1,13 @@
+[
+  {
+    "property": "pinned.extensions",
+    "type": "checkbox",
+    "label": "Enable Pinned Extensions mod",
+    "default": "true"
+  },
+  {
+    "property": "pinned.extensions.bottom",
+    "type": "checkbox",
+    "label": "Move pinned extensions to the bottom"
+  }
+]
