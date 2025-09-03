@@ -1,8 +1,13 @@
-/* ------------------------- PINNED EXTENSIONS ------------------------- */
+/* ==== Pinned Extensions ==== */
+/* https://github.com/Wacky-Wombat/Pinned-Extensions */
+/* ====== V0.0.1b ====== */
+
+/*** ====================================================================================
+  PINNED EXTENSIONS
+  Based on code from Nebula theme by https://github.com/JustAdumbPrsn/Zen-Nebula/tree/dev 
+==================================================================================== ***/
 
 @media (-moz-bool-pref: "pinned.extensions") {
-
-  :root {}
 
   /* Zen 1.12.6b Fix */
   :root[customizing] #TabsToolbar-customization-target {
@@ -176,10 +181,10 @@
   }
 
 
-
-
-  /* === BETTER CUSTOMIZE TOOLBAR === */
-  /* Based on code by https://github.com/Tanay-Kar */
+/*** ====================================================================================
+  BETTER CUSTOMIZE TOOLBAR
+  Based on code by https://github.com/Tanay-Kar
+==================================================================================== ***/
 
   #customization-container {
     /*position: absolute;
