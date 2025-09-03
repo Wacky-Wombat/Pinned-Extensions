@@ -1,1 +1,239 @@
+/* ------------------------- PINNED EXTENSIONS ------------------------- */
 
+@media (-moz-bool-pref: "pinned.extensions") {
+
+  :root {}
+
+  /* Zen 1.12.6b Fix */
+  :root[customizing] #TabsToolbar-customization-target {
+    visibility: visible !important;
+  }
+
+  .zen-workspace-pinned-tabs-section {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  :root[zen-single-toolbar="true"] #nav-bar {
+    margin-bottom: 8px !important;
+    /* Adjust gap between urlbar and extensions */
+  }
+
+  /* Pinned extensions */
+  #TabsToolbar-customization-target {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: calc(var(--zen-toolbox-padding) - 3px) !important;
+
+    #tabbrowser-tabs {
+      min-width: 100% !important;
+      height: calc(100% - 37px) !important;
+
+      @media (-moz-bool-pref: "pinned.extensions.bottom") {
+        order: -1;
+      }
+    }
+
+    #Zen-tabs-wrapper {
+      max-height: 700px !important;
+    }
+
+    .unified-extensions-item-action-button {
+      padding: 0 !important;
+    }
+
+    /* Pinned Extensions */
+    .unified-extensions-item {
+      margin-inline: 2px !important;
+      border-bottom: 0 !important;
+      padding: 0 !important;
+      height: 32px !important;
+      width: 32px !important;
+      flex-grow: 1 !important;
+      order: -1 !important;
+      background-color: rgba(225, 225, 225, 0.1) !important;
+      box-shadow: 00 3px light-dark(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0)) !important;
+      border-radius: calc(var(--border-radius-medium) - 0.5px) !important;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+    }
+
+    .unified-extensions-item:hover {
+      background-color: rgba(225, 225, 225, 0.3) !important;
+      /*box-shadow: 00 3px light-dark(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.95)) !important;*/
+      box-shadow: none !important;
+    }
+
+    > toolbarbutton:not([id="tabs-newtab-button"]):not(#sort-button):not(#clear-button),
+    > toolbaritem:not(#sort-button):not(#clear-button) {
+      height: 32px !important;
+      width: 32px !important;
+      flex-grow: 1 !important;
+      padding: 0 !important;
+
+      toolbarbutton,
+      stack {
+        --toolbarbutton-active-background: transparent !important;
+        --toolbarbutton-hover-background: transparent !important;
+      }
+
+    }
+
+    > toolbarbutton:not([id="tabs-newtab-button"]),
+    > toolbaritem {
+      background-color: rgba(225, 225, 225, 0.1) !important;
+      /*box-shadow: 0 0 3px light-dark(rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.12)) !important;*/
+      border-radius: calc(var(--border-radius-medium) + 1px) !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+      order: -1 !important;
+      flex-grow: 1 !important;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+    }
+
+    > toolbarbutton:not([id="tabs-newtab-button"]):hover,
+    > toolbaritem:hover {
+      background-color: rgba(225, 225, 225, 0.3) !important;
+      /*box-shadow: 0 0 3px light-dark(rgba(255, 255, 255, 0.95), rgba(0, 0, 0, 0.95)) !important;*/
+      box-shadow: none !important;
+    }
+  }
+
+  /* for collapsed toolbar */
+  html:not([zen-sidebar-expanded="true"]):not([zen-single-toolbar="true"]) #TabsToolbar-customization-target .unified-extensions-item {
+    width: 24px !important;
+    height: 32px !important;
+    margin-inline: 6px !important;
+    /* fake side padding */
+    margin-block: 2px !important;
+    /* vertical spacing */
+  }
+
+  .toolbarbutton-badge:empty {
+    display: none !important;
+  }
+
+  /*}*/
+
+  /* hide phantom buttons of pinned objects in cusomization window */
+  #TabsToolbar-customization-target {
+
+    .unified-extensions-item,
+    .zen-sidebar-action-button,
+    .toolbarbutton-1:not(#tabs-newtab-button) {
+      .toolbarbutton-text {
+        display: none !important;
+      }
+    }
+
+    #tabs-newtab-button {
+      gap: 9px;
+    }
+  }
+
+  :root[customizing] {
+
+    .customization-target {
+      outline: 1px dashed;
+      border-radius: 4px !important;
+      border: none !important;
+    }
+
+    #TabsToolbar-customization-target {
+
+      &::before {
+        content: url("chrome://browser/skin/zen-icons/pin.svg") "Drag & drop elements here to pin extensions/buttons!";
+        display: grid;
+        place-items: center;
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        font-size: 1.4rem;
+        text-align: center;
+        text-wrap: balance;
+        align-self: center;
+      }
+
+      #tabbrowser-tabs {
+        visibility: hidden;
+      }
+
+      toolbarbutton {
+        /*border: 1px dashed;
+        border-radius: 2px;
+        margin: 0;*/
+      }
+    }
+
+    &[lang="de"] {
+      #TabsToolbar-customization-target {
+
+        &::before {
+          content: url("chrome://browser/skin/zen-icons/pin.svg") "Elemente hier her ziehen und ablegen, um Erweiterungen/Buttons anzuheften!";
+        }
+      }
+    }
+  }
+
+
+
+
+  /* === BETTER CUSTOMIZE TOOLBAR === */
+  /* Based on code by https://github.com/Tanay-Kar */
+
+  #customization-container {
+    /*position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    right: 10px;
+    height: 80%;
+    width: 70%;
+    border-radius: 12px;
+
+    padding: 10px;
+    background: light-dark(rgba(255, 255, 255, 0.32), rgba(0, 0, 0, 0.3)) !important;*/
+    background: rgb(from color-mix(in srgb, var(--zen-main-browser-background) 1%, var(--zen-branding-bg) 99%) r g b / .6) !important;
+  }
+
+  @media (-moz-bool-pref: "zen.tabs.vertical.right-side") {
+    #customization-container {
+      left: 10px;
+    }
+
+    #customization-container #customization-content-container {
+      flex-direction: row-reverse;
+    }
+  }
+
+  #customization-container #customization-panel-container {
+    padding: 10px !important;
+  }
+
+
+  #customization-container #customization-panelWrapper {
+    --panel-arrow-offset: 0px;
+  }
+
+  #customization-container .panel-arrowbox {
+    display: none !important;
+  }
+
+  #customization-container .panel-arrowcontent {
+    height: 100% !important;
+    background: light-dark(rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.4)) !important;
+    border: none !important;
+    margin: 0 !important;
+    border-radius: 8px;
+  }
+
+
+  /* Check when the width is low */
+  @media (max-width: 700px) {
+
+    /* Adjust the threshold as needed */
+    #customization-container {
+      border: 2px solid red;
+      /* Temporary visual indicator */
+    }
+  }
+}
