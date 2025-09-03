@@ -1,0 +1,26 @@
+{
+    "id": "pinned-extensions",
+    "name": "Pinned Extensions",
+    "description": "Pinned Extensions as a standalone version without having to install a complete theme like Nebula or Arc 2.0.\n ",
+    "js": false,
+    "homepage": "https://github.com/Wacky-Wombat/Pinned-Extensions",
+    "preferences": "https://raw.githubusercontent.com/Wacky-Wombat/Pinned-Extensions/main/preferences.json",
+    "style": "https://raw.githubusercontent.com/Wacky-Wombat/Pinned-Extensions/main/userChrome.css",
+    "readme": "https://raw.githubusercontent.com/Wacky-Wombat/Pinned-Extensions/main/README.md",
+    "image": "https://raw.githubusercontent.com/Wacky-Wombat/Pinned-Extensions/main/image.png",
+    "author": "WW",
+    "version": "0.0.1b",
+    "tags": [
+        "Zen Browser",
+        "Vertical Tabs",
+        "Tab Groups"
+    ],
+    "createdAt": "2025-09-05",
+    "updatedAt": "2025-09-05 23:47",
+    "fork": [
+        "zen"
+    ]
+
+}
+
+
