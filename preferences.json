@@ -1,6 +1,6 @@
 [
   {
-    "property": "pinned.extensions",
+    "property": "pinned.extensions.mod",
     "type": "checkbox",
     "label": "Enable Pinned Extensions mod",
     "default": "true"
@@ -8,6 +8,66 @@
   {
     "property": "pinned.extensions.bottom",
     "type": "checkbox",
-    "label": "Move pinned extensions to the bottom"
+    "label": "Move pinned extensions to the bottom",
+    "margin": "var(--space-small) 0 var(--space-small) 22px",
+    "conditions": [
+      {
+        "if": {
+          "property": "pinned.extensions.mod",
+          "value": true
+        }
+      }
+    ]
+  },
+  {
+    "type": "separator",
+    "label": "Just in case"
+  },
+  {
+    "property": "nebula-pinned-extensions-mod",
+    "type": "checkbox",
+    "label": "Disable Nebula's Pinned Extensions mod",
+    "default": "false"
+  },
+  {
+    "property": "arc-pinned-extensions-mod",
+    "type": "checkbox",
+    "label": "Disable Arc 2.0's Pinned Extensions mod",
+    "default": "false"
+  },
+  {
+    "type": "separator",
+    "label": "Bonus features"
+  },
+  {
+    "property": "workspaces.selector.ontop",
+    "type": "checkbox",
+    "label": "Move workspace selector toolbar to the top",
+    "default": "false"
+  },
+  {
+    "type": "separator",
+    "label": ""
+  },
+  {
+    "property": "vertical.tabs-toolbar",
+    "type": "checkbox",
+    "label": "Display tabs toolbar in sidebar vertically",
+    "default": "false"
+  },
+  {
+    "property": "vertical.tabs-toolbar.right",
+    "type": "checkbox",
+    "label": "Place toolbar on the right side of sidebar",
+    "default": "false",
+    "margin": "var(--space-small) 0 var(--space-small) 22px",
+    "conditions": [
+      {
+        "if": {
+          "property": "vertical.tabs-toolbar",
+          "value": true
+        }
+      }
+    ]
   }
 ]
