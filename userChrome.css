@@ -2,12 +2,13 @@
 /* https://github.com/Wacky-Wombat/Pinned-Extensions */
 /* ====== V0.0.1b ====== */
 
+
 /*** ====================================================================================
-  PINNED EXTENSIONS
   Based on code from Nebula theme by https://github.com/JustAdumbPrsn/Zen-Nebula/tree/dev 
 ==================================================================================== ***/
 
-@media (-moz-bool-pref: "pinned.extensions") {
+@media (-moz-bool-pref: "pinned.extensions.mod") and (-moz-bool-pref: "zen.view.sidebar-expanded") {
+  /*@media not (-moz-bool-pref: "arc-pinned-extensions-mod") {*/
 
   /* Zen 1.12.6b Fix */
   :root[customizing] #TabsToolbar-customization-target {
@@ -15,8 +16,8 @@
   }
 
   .zen-workspace-pinned-tabs-section {
-    display: flex !important;
-    flex-direction: column;
+    /*display: flex !important;
+    flex-direction: column;*/
   }
 
   :root[zen-single-toolbar="true"] #nav-bar {
@@ -138,53 +139,83 @@
 
   :root[customizing] {
 
-    .customization-target {
+    .customization-target:not(#zen-sidebar-top-buttons-customization-target) {
       outline: 1px dashed;
-      border-radius: 4px !important;
+      border-radius: var(--border-radius-small) !important;
       border: none !important;
     }
 
     #TabsToolbar-customization-target {
+      --pinned-extensions-icon: url("chrome://browser/skin/zen-icons/pin.svg");
+      --pinned-extensions-header: "Pinned Extensions";
+      --pinned-extensions-desc: "Drag & drop elements here to pin them!";
+      height: auto !important;
+      min-height: 40px !important;
+      padding-block: 5px 0;
+      margin-block: 5px auto;
+
+      &::before,
+      &::after {
+        position: static !important;
+        -moz-context-properties: fill, fill-opacity;
+        fill: currentColor;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        width: -moz-available !important;
+        padding: 8px 10px;
+        opacity: .9;
+        background: light-dark(rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.1)) !important;
+        border-radius: var(--border-radius-medium);
+        transform: none !important;
+      }
 
       &::before {
-        content: url("chrome://browser/skin/zen-icons/pin.svg") "Drag & drop elements here to pin extensions/buttons!";
-        display: grid;
-        place-items: center;
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        font-size: 1.4rem;
-        text-align: center;
-        text-wrap: balance;
-        align-self: center;
+        order: 1;
+        content: var(--pinned-extensions-icon) var(--pinned-extensions-header);
+        font-size: 1.2em;
+        padding: 8px 8px 4px;
+        margin-block-end: -3px !important;
+      }
+
+      &::after {
+        order: 2;
+        content: var(--pinned-extensions-desc) !important;
+        height: auto !important;
+        padding-block-start: 0 !important;
+        margin-block-start: 0 !important
+      }
+
+      [lang="de"] & {
+        &::before {
+          --pinned-extensions-header: "Angeheftete Erweiterungen";
+        }
+
+        &::after {
+          --pinned-extensions-desc: "Elemente hier her ziehen und ablegen, um sie anzuheften!";
+        }
       }
 
       #tabbrowser-tabs {
-        visibility: hidden;
+        order: 10;
+        height: 0 !important;
+        overflow: clip !important;
+        /*border-block-start: 1px solid red !important;*/
       }
 
-      toolbarbutton {
-        /*border: 1px dashed;
-        border-radius: 2px;
-        margin: 0;*/
-      }
+      toolbarbutton {}
     }
 
-    &[lang="de"] {
-      #TabsToolbar-customization-target {
 
-        &::before {
-          content: url("chrome://browser/skin/zen-icons/pin.svg") "Elemente hier her ziehen und ablegen, um Erweiterungen/Buttons anzuheften!";
-        }
-      }
-    }
+    #TabsToolbar-customization-target {}
   }
 
 
-/*** ====================================================================================
-  BETTER CUSTOMIZE TOOLBAR
-  Based on code by https://github.com/Tanay-Kar
-==================================================================================== ***/
+  /*** ====================================================================================
+    BETTER CUSTOMIZE TOOLBAR
+    Based on code by https://github.com/Tanay-Kar
+  ==================================================================================== ***/
 
   #customization-container {
     /*position: absolute;
@@ -239,6 +270,103 @@
     #customization-container {
       border: 2px solid red;
       /* Temporary visual indicator */
+    }
+  }
+
+
+
+  /* Fix bottom spacing if essentials are at the bottom (-> SuperPins mod) */
+  @media (-moz-pref("uc.essentials.position", "bottom")) {
+
+    #zen-essentials {
+      height: min-content !important;
+      overflow: hidden !important;
+      /*padding-inline-start: calc(var(--zen-toolbox-padding) / 2) !important;*/
+
+      .zen-essentials-container + .zen-essentials-container {
+        visibility: collapse !important;
+
+      }
+    }
+  }
+
+  /*
+  #navigator-toolbox {
+    & #zen-workspaces-button {
+      margin-bottom: 10px !important;
+      justify-content: space-between !important;
+      font-size: 1.3em !important;
+      overflow: visible !important;
+
+      & toolbarbutton {
+        scale: 1;
+
+        &:hover,
+        &[active] {
+          scale: 1.6;
+          transition: scale .75s ease-in-out;
+        }
+      }
+    }
+  }
+*/
+  @media not (-moz-bool-pref: "zen.view.sidebar-expanded") {
+    #navigator-toolbox {
+      & #zen-workspaces-button {
+        gap: 0 !important;
+        width: calc(100% - 8px) !important;
+        /*max-height: min-content !important;*/
+        height: fit-content !important;
+        overflow: scroll !important;
+        scrollbar-width: thin !important;
+        margin-inline: auto !important;
+        display: flex !important;
+        flex-direction: row !important;
+        /*width: 100% !important;*/
+
+        & toolbarbutton {
+          /*margin: 0;
+        max-width: 26px;
+        height: 26px;*/
+          display: block;
+          /*justify-content: center;
+        padding: 0 !important;
+        align-items: center;
+        position: relative;
+        fill-opacity: 0.6;*/
+        }
+      }
+    }
+  }
+
+}
+
+
+/*}*/
+#navigator-toolbox[zen-sidebar-expanded="true"] {
+  @media (-moz-bool-pref: "workspaces.selector.ontop") {
+    #zen-sidebar-foot-buttons {
+      order: -1;
+    }
+  }
+
+  @media (-moz-bool-pref: "vertical.tabs-toolbar") {
+    #TabsToolbar {
+      flex-direction: row !important;
+      align-items: center !important;
+
+      #zen-workspaces-button {
+        flex-direction: column !important;
+      }
+
+      @media (-moz-bool-pref: "vertical.tabs-toolbar.right") {
+        flex-direction: row-reverse !important;
+      }
+    }
+
+    #zen-sidebar-foot-buttons {
+      flex-direction: column !important;
+      width: min-content !important;
     }
   }
 }
