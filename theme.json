@@ -1,7 +1,7 @@
 {
     "id": "pinned-extensions",
     "name": "Pinned Extensions",
-    "description": "Pinned Extensions as a standalone version without having to install a complete theme like Nebula or Arc 2.0.\n ",
+    "description": "Pinned Extensions as a standalone version without having to install a complete theme like Nebula or Arc 2.0.",
     "js": false,
     "homepage": "https://github.com/Wacky-Wombat/Pinned-Extensions",
     "preferences": "https://raw.githubusercontent.com/Wacky-Wombat/Pinned-Extensions/main/preferences.json",
@@ -17,7 +17,7 @@
         "Pinned Extensions"
     ],
     "createdAt": "2025-09-05",
-    "updatedAt": "2025-09-05 23:47",
+    "updatedAt": "2025-09-26 07:39",
     "fork": [
         "zen"
     ]
